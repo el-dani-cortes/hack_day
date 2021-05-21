@@ -41,7 +41,6 @@ class HolbertonAPI:
         """
         Method to get project from holberton platform
         """
-        print("*****into your project ID*********")
         # url to requests a project info
         url = "https://intranet.hbtn.io/projects/{}.json?auth_token={}".format(id_project, token)
 
@@ -54,8 +53,11 @@ class HolbertonAPI:
             print("Something went wrong, check your password and email. Code Error:{}".format(response.status_code))
             tasks = response.json()["error"]
         else:
-            project = response.json() # Parse json to a dict object
-            tasks = project["tasks"] # Save all task in variable. This is a array of hashes with every task of the project
+            try:
+                project = response.json() # Parse json to a dict object
+                tasks = project["tasks"] # Save all task in variable. This is a array of hashes with every task of the project
+            except:
+                return None
         return tasks
 
     def get_task(self, id_task, token):
@@ -123,6 +125,3 @@ class HolbertonAPI:
             with open('checkerLogin.txt', 'w') as f:
                 json.dump(obj, f)
         return([email, password, api_key])
-
-
-
