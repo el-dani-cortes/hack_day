@@ -64,7 +64,6 @@ class CreateFile:
                 for dir in dirs:
                     route += dir.strip() + "/"
                     path = self.repo + self.directory + dir.strip()
-                    print(path)
                     dir_exist = os.path.isdir(path)
                     if dir_exist is False:
                         os.makedirs(path)
