@@ -5,7 +5,7 @@ Authentication to holberton API
 import requests
 import json
 import os
-
+from getpass import getpass
 
 class HolbertonAPI:
     """
@@ -108,18 +108,18 @@ class HolbertonAPI:
         value = os.path.isfile('checkerLogin.txt') 
 
         if value:
-            print("******************************")
-            print("You already register\n")
+            print("**************************************")
+            print("****** You are already register ******")
+            print("**************************************")
             with open('checkerLogin.txt', 'r') as f:
                 data = json.load(f)
             email = data['email']
             password = data['password']
             api_key = data['api_key']    
         else:
-            print('\n\n*****************************')
-            print('**********    ***************\n\n')
-            email = input("Enter your code: ")
-            password = input("Enter your password: ")
+            print("**************************************")
+            email = input("Enter your holberton's code: ")
+            password = getpass('Enter your password: ')
             api_key = input("Enter your API key: ")
             obj = {'email': email, 'password': password, "api_key": api_key}
             with open('checkerLogin.txt', 'w') as f:
