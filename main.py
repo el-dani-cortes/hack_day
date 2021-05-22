@@ -5,6 +5,7 @@ from create_files import CreateFile
 import json
 import os
 import sys
+import time
 
 
 while (True):
@@ -34,8 +35,10 @@ if len(sys.argv) == 1:
         new_file.create_directory()
         new_file.create_file(task)
     print("+-------------------------------------+")
+    time.sleep(2)
     print("***** \033[92mAll files have been created\033[00m *****")
     print("+-------------------------------------+")
+    time.sleep(2)
     print("******** \033[93mYou can begin to code\033[00m ********")
     print("+-------------------------------------+")
 elif len(sys.argv) == 2:
