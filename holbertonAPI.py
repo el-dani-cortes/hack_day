@@ -11,10 +11,9 @@ class HolbertonAPI:
     """
     Class to request different information to holberton's API
     """
-    
     def auth_holberton(self, email, password, api_key):
         """
-        Method to authenticate a user to holberton school API 
+        Method to authenticate a user to holberton school API
         """
         url = "https://intranet.hbtn.io/users/auth_token.json"
         data = {
@@ -27,9 +26,9 @@ class HolbertonAPI:
             'Content-Type': 'application/json'
         }
 
-        result_login = requests.post(url, data=json.dumps(data), headers=header).json()
+        result_login = requests.post(url, data=json.dumps(data),
+                                     headers=header).json()
         return(result_login)
-        
 
     def get_profile():
         """
@@ -42,7 +41,8 @@ class HolbertonAPI:
         Method to get project from holberton platform
         """
         # url to requests a project info
-        url = "https://intranet.hbtn.io/projects/{}.json?auth_token={}".format(id_project, token)
+        url = ("https://intranet.hbtn.io/projects/{}.json?auth_token={}"
+               .format(id_project, token))
 
         #Call the request
         headers = {
@@ -50,12 +50,16 @@ class HolbertonAPI:
                 }
         response = requests.get(url, headers=headers)
         if response.status_code != 200:
-            print("Something went wrong, check your password and email. Code Error:{}".format(response.status_code))
+            error_text = "Something went wrong, check your password and email. "
+            print("{}Code Error:{}".format(error_text, response.status_code))
             tasks = response.json()["error"]
         else:
             try:
-                project = response.json() # Parse json to a dict object
-                tasks = project["tasks"] # Save all task in variable. This is a array of hashes with every task of the project
+                # Parse json to a dict object
+                project = response.json()
+                # Save all task in variable. This is a array of hashes with
+                # every task of the project
+                tasks = project["tasks"]
             except:
                 return None
         return tasks
@@ -64,19 +68,20 @@ class HolbertonAPI:
         """
         Method to get a task from a project's holberton platform
         """
-        url = "https://intranet.hbtn.io/tasks/{}.json?auth_token={}".format(id_task, token)
+        url = ("https://intranet.hbtn.io/tasks/{}.json?auth_token={}"
+               .format(id_task, token))
         header = {
             'Content-Type': 'application/json'
         }
         task_info = requests.get(url, headers=header).json()
         return(task_info)
-        
 
     def request_correction(self, id_task, token):
         """
         Method to ask for correction of a task
         """
-        url = "https://intranet.hbtn.io/tasks/{}/start_correction.json?auth_token={}".format(id_task, token)
+        url = ("https://intranet.hbtn.io/tasks/{}/start_correction.json?auth_token={}"
+               .format(id_task, token))
         header = {
             'Content-Type': 'application/json'
         }
@@ -84,38 +89,40 @@ class HolbertonAPI:
         if ask_correction == None:
             print("The correction can’t be queued now")
         return(ask_correction)
-        
 
     def get_correction_result(self, ask_correction_id, token):
         """
         Method to get correction result of a task
         """
-        url = "https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}".format(str(ask_correction_id['id']), token)
-        header = {
-            'Content-Type': 'application/json'
-        }
-        while (True):
-            result = requests.get(url, headers=header).json()
-            if result['status'] == 'Done':
-                checks = result['result_display']['checks']    
-                return(checks)
-            
+        try:
+            url = ("https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}"
+                   .format(str(ask_correction_id['id']), token))
+            header = {
+                'Content-Type': 'application/json'
+            }
+            while (True):
+                result = requests.get(url, headers=header).json()
+                if result['status'] == 'Done':
+                    checks = result['result_display']['checks']
+                    return(checks)
+        except (BaseException) as e:
+            print("Rate limit you only have 100 requests per hour".format(e))
 
     def validate_login(self):
         """
         Method to validate login
         """
-        value = os.path.isfile('checkerLogin.txt') 
+        value = os.path.isfile('checkerLogin.txt')
 
         if value:
-            print("**************************************")
-            print("****** You are already register ******")
-            print("**************************************")
+            print("+-------------------------------------+")
+            print("***** \033[92mYou are already registered\033[00m ******")
+            print("+-------------------------------------+")
             with open('checkerLogin.txt', 'r') as f:
                 data = json.load(f)
             email = data['email']
             password = data['password']
-            api_key = data['api_key']    
+            api_key = data['api_key']
         else:
             print("**************************************")
             email = input("Enter your holberton's code: ")

@@ -14,10 +14,10 @@ class CreateFile:
         """
         Save all the paths and names needed
         """
-        self.repo = "./" + repo 
-        self.directory = "/" + directory + "/" 
+        self.repo = "./" + repo
+        self.directory = "/" + directory + "/"
         self.filename = filename
-    
+
     def create_repo(self):
         """
         Validate and create repository path
@@ -67,12 +67,12 @@ class CreateFile:
                     dir_exist = os.path.isdir(path)
                     if dir_exist is False:
                         os.makedirs(path)
-                
+
             if new_route:
                 file_path = self.repo + self.directory + route + file.strip()
             else:
                 file_path = self.repo + self.directory + file.strip()
-        
+
             file_exist = os.path.isfile(file_path)
             if file_exist is False:
                 if file_path[-3:] in dir_shebang or file_path[-2:] in dir_shebang:
