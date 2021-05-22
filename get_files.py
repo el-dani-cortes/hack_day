@@ -14,10 +14,10 @@ class CreateFiles:
         """
         Save all the paths and names needed
         """
-        self.repo = "./" + repo 
-        self.directory = "/" + directory + "/" 
+        self.repo = "./" + repo
+        self.directory = "/" + directory + "/"
         self.filename = filename
-    
+
     def create_repo(self)
         """
         Validate and create repository path
