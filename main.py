@@ -64,7 +64,8 @@ elif len(sys.argv) == 2:
                             print("\033[31mCheck failed!\033[00m")
                 print("***************************************")
             else:
-                print("\033[95mThe task: must request a manual review\033[00m")
+                print("\033[95mThis task requieres a manual review\033[00m")
+                print("***************************************")
 else:
     id_project = sys.argv[1]
     id_task = int(sys.argv[2]) + 1
@@ -91,4 +92,5 @@ else:
                         print("\033[31mCheck failed!\033[00m")
             print("***************************************")
         else:
-            print("\033[95mThe task: must request a manual review\033[00m")
+            print("\033[95mThis task requieres a manual review\033[00m")
+            print("***************************************")
