@@ -11,10 +11,9 @@ class HolbertonAPI:
     """
     Class to request different information to holberton's API
     """
-    
     def auth_holberton(self, email, password, api_key):
         """
-        Method to authenticate a user to holberton school API 
+        Method to authenticate a user to holberton school API
         """
         url = "https://intranet.hbtn.io/users/auth_token.json"
         data = {
@@ -29,7 +28,6 @@ class HolbertonAPI:
 
         result_login = requests.post(url, data=json.dumps(data), headers=header).json()
         return(result_login)
-        
 
     def get_profile():
         """
@@ -70,7 +68,6 @@ class HolbertonAPI:
         }
         task_info = requests.get(url, headers=header).json()
         return(task_info)
-        
 
     def request_correction(self, id_task, token):
         """
@@ -84,28 +81,29 @@ class HolbertonAPI:
         if ask_correction == None:
             print("The correction can’t be queued now")
         return(ask_correction)
-        
 
     def get_correction_result(self, ask_correction_id, token):
         """
         Method to get correction result of a task
         """
-        url = "https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}".format(str(ask_correction_id['id']), token)
-        header = {
-            'Content-Type': 'application/json'
-        }
-        while (True):
-            result = requests.get(url, headers=header).json()
-            if result['status'] == 'Done':
-                checks = result['result_display']['checks']    
-                return(checks)
-            
+        try:
+            url = "https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}".format(str(ask_correction_id['id']), token)
+            header = {
+                'Content-Type': 'application/json'
+            }
+            while (True):
+                result = requests.get(url, headers=header).json()
+                if result['status'] == 'Done':
+                    checks = result['result_display']['checks']
+                    return(checks)
+        except (BaseException) as e:
+            print("Rate limit you only have 100 requests per hour".format(e))
 
     def validate_login(self):
         """
         Method to validate login
         """
-        value = os.path.isfile('checkerLogin.txt') 
+        value = os.path.isfile('checkerLogin.txt')
 
         if value:
             print("**************************************")
@@ -115,7 +113,7 @@ class HolbertonAPI:
                 data = json.load(f)
             email = data['email']
             password = data['password']
-            api_key = data['api_key']    
+            api_key = data['api_key']
         else:
             print("**************************************")
             email = input("Enter your holberton's code: ")
