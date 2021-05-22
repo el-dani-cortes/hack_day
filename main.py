@@ -43,7 +43,8 @@ elif len(sys.argv) == 2:
     token = data_user['auth_token']
     tasks = user.get_project(token, id_project)
     if tasks == "Not Found" or tasks is None:
-        print("** \033[31mProject id wrong, try again.\033[00m **")
+        print("***** \033[31mProject id wrong, try again\033[00m *****")
+        print("+-------------------------------------+")
     else:
         for task in tasks:
             task_info = user.get_task(task['id'], token)
@@ -67,7 +68,8 @@ else:
     token = data_user['auth_token']
     tasks = user.get_project(token, id_project)
     if tasks == "Not Found" or tasks is None:
-        print("** \033[31mProject id wrong, try again.\033[00m **")
+        print("***** \033[31mProject id wrong, try again\033[00m *****")
+        print("+-------------------------------------+")
     else:
         for task in tasks:
             if task['position'] == id_task:
