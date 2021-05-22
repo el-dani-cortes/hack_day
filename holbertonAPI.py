@@ -26,7 +26,8 @@ class HolbertonAPI:
             'Content-Type': 'application/json'
         }
 
-        result_login = requests.post(url, data=json.dumps(data), headers=header).json()
+        result_login = requests.post(url, data=json.dumps(data),
+                                     headers=header).json()
         return(result_login)
 
     def get_profile():
@@ -40,7 +41,8 @@ class HolbertonAPI:
         Method to get project from holberton platform
         """
         # url to requests a project info
-        url = "https://intranet.hbtn.io/projects/{}.json?auth_token={}".format(id_project, token)
+        url = ("https://intranet.hbtn.io/projects/{}.json?auth_token={}"
+               .format(id_project, token))
 
         #Call the request
         headers = {
@@ -48,12 +50,16 @@ class HolbertonAPI:
                 }
         response = requests.get(url, headers=headers)
         if response.status_code != 200:
-            print("Something went wrong, check your password and email. Code Error:{}".format(response.status_code))
+            error_text = "Something went wrong, check your password and email. "
+            print("{}Code Error:{}".format(error_text, response.status_code))
             tasks = response.json()["error"]
         else:
             try:
-                project = response.json() # Parse json to a dict object
-                tasks = project["tasks"] # Save all task in variable. This is a array of hashes with every task of the project
+                # Parse json to a dict object
+                project = response.json()
+                # Save all task in variable. This is a array of hashes with
+                # every task of the project
+                tasks = project["tasks"]
             except:
                 return None
         return tasks
@@ -62,7 +68,8 @@ class HolbertonAPI:
         """
         Method to get a task from a project's holberton platform
         """
-        url = "https://intranet.hbtn.io/tasks/{}.json?auth_token={}".format(id_task, token)
+        url = ("https://intranet.hbtn.io/tasks/{}.json?auth_token={}"
+               .format(id_task, token))
         header = {
             'Content-Type': 'application/json'
         }
@@ -73,7 +80,8 @@ class HolbertonAPI:
         """
         Method to ask for correction of a task
         """
-        url = "https://intranet.hbtn.io/tasks/{}/start_correction.json?auth_token={}".format(id_task, token)
+        url = ("https://intranet.hbtn.io/tasks/{}/start_correction.json?auth_token={}"
+               .format(id_task, token))
         header = {
             'Content-Type': 'application/json'
         }
@@ -87,7 +95,8 @@ class HolbertonAPI:
         Method to get correction result of a task
         """
         try:
-            url = "https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}".format(str(ask_correction_id['id']), token)
+            url = ("https://intranet.hbtn.io/correction_requests/{}.json?auth_token={}"
+                   .format(str(ask_correction_id['id']), token))
             header = {
                 'Content-Type': 'application/json'
             }
