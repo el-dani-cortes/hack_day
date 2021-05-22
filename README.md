@@ -16,16 +16,16 @@ If the project already exists and you want to run the checker in the terminal, y
 ## Organization
 
 **CEO**: Jhon Arias Esparza
-LinkIn: [jhon-arias](https://www.linkedin.com/in/jhon-arias/)
+LinkedIn: [jhon-arias](https://www.linkedin.com/in/jhon-arias/)
 
 **Product Manager**: Daniel Cortes Sully
-LinkIn: [danielcortessully](https://www.linkedin.com/in/danielcortessully/)
+LinkedIn: [danielcortessully](https://www.linkedin.com/in/danielcortessully/)
 
 **DevOps** :  Juan Carlos Hernández
-LinkIn: [jonghernandez](https://www.linkedin.com/in/jonghernandez/)
+LinkedIn: [jonghernandez](https://www.linkedin.com/in/jonghernandez/)
 
 **Front_end**:  Andres Sotelo Durán
-LinkIn: [andresotelo](https://www.linkedin.com/in/andresotelo/))
+LinkedIn: [andresotelo](https://www.linkedin.com/in/andresotelo/))
 
 ## Instruccions
 
