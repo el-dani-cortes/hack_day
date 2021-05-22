@@ -106,9 +106,9 @@ class HolbertonAPI:
         value = os.path.isfile('checkerLogin.txt')
 
         if value:
-            print("**************************************")
-            print("****** You are already register ******")
-            print("**************************************")
+            print("+-------------------------------------+")
+            print("***** \033[92mYou are already registered\033[00m ******")
+            print("+-------------------------------------+")
             with open('checkerLogin.txt', 'r') as f:
                 data = json.load(f)
             email = data['email']
